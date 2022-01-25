@@ -1,0 +1,14 @@
+<apex:page standardStylesheets="false">
+    <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&#38;display=swap');
+
+        .title {
+            font-size: 48px;
+            color: red;
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+    <!-- Begin Default Content REMOVE THIS -->
+    <apex:outputText styleClass="title" value="Welcome to Stairs & Snakes" /> This is your new Page
+    <!-- End Default Content REMOVE THIS -->
+</apex:page>
