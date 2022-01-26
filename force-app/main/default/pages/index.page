@@ -2,8 +2,14 @@
     <style type="text/css">
         /*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&#38;display=swap');*/
 
+        @font-face {
+            font-family: 'Roboto-Medium';
+            src: url('{!URLFOR($Resource.RobotoFont, "RobotoFont/Roboto-Medium.ttf")}');
+        }
+
         .title {
             margin-bottom: 30px;
+            font-family: Roboto-Medium;
         }
 
         span {
@@ -65,7 +71,7 @@
             <c:customInput label="Board Width" />
             <c:customInput label="Board Height" />
             <c:customInput label="Board Player Count" />
-            <button onclick="onPlay()" class="bg-transparent hover:bg-indigo-500 text-indigo-700 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
+            <button onclick="onPlay()" class="bg-transparent hover:bg-indigo-500 text-indigo-500 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
                 Play
             </button>
             <p id="PlayersResume"></p>
@@ -81,9 +87,14 @@
         }
 
         function onPlay() {
-            GameController.initGame(10, 10, 2, (res, e) => {
+            const width = parseInt(document.getElementById('11input').value);
+            const height = parseInt(document.getElementById('12input').value);
+            const playerCount = parseInt(document.getElementById('18input').value);
+
+            GameController.initGame(width, height, playerCount, (res, e) => {
                 if (e.status) {
-                    console.log(res);
+                    res = res.split('').reduce((acc, e) => acc + (e === '-' ? '<br/>' : e), '');
+                    document.getElementById('PlayersResume').innerHTML = res;
                 }
             });
         }
