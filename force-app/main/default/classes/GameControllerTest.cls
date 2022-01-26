@@ -1,5 +1,7 @@
 @IsTest
 public with sharing class GameControllerTest {
+
+    // this test provide us a feedback about game main loop functionallity
     @IsTest
     static void validateGameInitialization(){
         

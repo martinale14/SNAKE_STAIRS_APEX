@@ -1,5 +1,6 @@
 public with sharing class ObstaclesService {
 
+    // Method to generate the obstacles of a giving board size
     public static List<Obstacle__c> generateObstacles(Board__c board){
 
         Integer size = board.Size__c.intValue();
@@ -21,6 +22,7 @@ public with sharing class ObstaclesService {
         return obstacles;
     }
 
+    // Method to get random numbers that are not included in a giving array of giving size
     public static Integer getRandomNumberNotIncluded(List<Integer> used, Integer max, Integer min){
         if(max - min == used.size()){
             throw new InfiniteLoopException('Warning preventing infinite loop');

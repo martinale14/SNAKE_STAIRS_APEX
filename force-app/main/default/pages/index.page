@@ -1,3 +1,7 @@
+<!-- 
+    @description This is the page that let us input the properties we want to have in our game
+ -->
+
 <apex:page standardStylesheets="false" controller="GameController">
     <style type="text/css">
         /*@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&#38;display=swap');*/
@@ -14,6 +18,14 @@
 
         span {
             width: 100%;
+        }
+
+        body {
+            background-color: #0F172A;
+        }
+
+        p {
+            margin-top: 20px;
         }
 
         .custom_container {
@@ -71,19 +83,29 @@
             <c:customInput label="Board Width" />
             <c:customInput label="Board Height" />
             <c:customInput label="Board Player Count" />
-            <button onclick="onPlay()" class="bg-transparent hover:bg-indigo-500 text-indigo-500 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
+            <p class="p4 non-italic text-white">Please fill all the fields before hit play 0 is no permitted</p>
+            <button id="buttonPlay" disabled="true" onclick="onPlay()" class="bg-transparent hover:bg-indigo-500 text-indigo-500 font-semibold hover:text-white py-2 px-4 border border-indigo-500 hover:border-transparent rounded">
                 Play
             </button>
-            <p id="PlayersResume"></p>
+
+            <p class="p4 non-italic text-white" id="PlayersResume"></p>
         </div>
     </div>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script type="text/javascript">
+    <script src="https://cdn.tailwindcss.com "></script>
+    <script type="text/javascript ">
         function onChangeNumber(id) {
             const newValue = Math.abs(parseInt(document.getElementById(id).value));
             document.getElementById(id).value = newValue > 999 ? 999 :
                 newValue < 1 ? 1 : newValue;
+
+            const width = document.getElementById('11input').value;
+            const height = document.getElementById('12input').value;
+            const playerCount = document.getElementById('18input').value;
+
+            if (width.length > 0 && height.length > 0 && playerCount.length > 0) {
+                document.getElementById("buttonPlay").disabled = false;
+            }
         }
 
         function onPlay() {
@@ -91,12 +113,15 @@
             const height = parseInt(document.getElementById('12input').value);
             const playerCount = parseInt(document.getElementById('18input').value);
 
-            GameController.initGame(width, height, playerCount, (res, e) => {
-                if (e.status) {
-                    res = res.split('').reduce((acc, e) => acc + (e === '-' ? '<br/>' : e), '');
-                    document.getElementById('PlayersResume').innerHTML = res;
-                }
-            });
+            if(width !== 0 && height !== 0 && playerCount !== 0){
+                GameController.initGame(width, height, playerCount, (res, e) => {
+                    if (e.status) {
+                        res = res.split('').reduce((acc, e) => acc + (e === '-' ? '<br/>' : e), '');
+                        document.getElementById('PlayersResume').innerHTML = res;
+                    }
+                });
+            }
         }
+
     </script>
 </apex:page>
